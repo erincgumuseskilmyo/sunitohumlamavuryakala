@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Görsel Kontrol</title>
+<style>
+  :root{--bg:#fff8ea;--ink:#2b2016;--muted:#7b6a55;--line:#e4d5ae;--ok:#3f8a4a;--no:#b34848;--wood:#5a3620;}
+  body{margin:0;padding:16px;background:var(--bg);color:var(--ink);font-family:system-ui,sans-serif;}
+  main{max-width:900px;margin:0 auto;}
+  h1{color:var(--wood);margin:0 0 6px;font-size:1.5rem;}
+  p{line-height:1.5;margin:0 0 10px;}
+  code{background:#f1e4c7;padding:1px 5px;border-radius:4px;font-size:.9em;user-select:all;}
+  .sum{font-weight:700;margin:12px 0;}
+  h2{color:var(--wood);font-size:1.1rem;margin:22px 0 8px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;}
+  .c{background:#fff;border:2px solid var(--line);border-radius:10px;overflow:hidden;}
+  .c.missing{border-color:var(--no);border-style:dashed;}
+  .pic{aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:#faf5ea;font-size:2.6rem;}
+  .pic img{width:100%;height:100%;object-fit:cover;display:block;}
+  .meta{padding:6px 8px;font-size:.8rem;line-height:1.35;}
+  .meta b{display:block;font-size:.85rem;}
+  .st{font-weight:700;}
+  .ok{color:var(--ok);} .no{color:var(--no);}
+  .kind{font-size:.72rem;color:var(--muted);}
+</style>
+</head>
+<body>
+<main>
+  <h1>Görsel Kontrol</h1>
+  <p>Oyundaki her kartın görseli <code>gorseller/</code> klasöründen okunur. Dosya adı aşağıdaki
+  <b>kart kimliği</b> olmalıdır; uzantı <code>.jpg</code>, <code>.jpeg</code>, <code>.png</code>,
+  <code>.webp</code> veya <code>.gif</code> olabilir. Örnek: <code>gorseller/1_tohumlama_pistoleti.png</code></p>
+  <p>Dosyayı ekledikten / değiştirdikten sonra bu sayfayı yenileyin. Görseli olmayan kartlarda oyun emoji gösterir.
+  Kare (1:1) görseller en iyi sonucu verir; diğerleri ortadan kırpılır.</p>
+  <p class="sum" id="sum">Kontrol ediliyor…</p>
+  <div id="list"></div>
+</main>
+<script src="js/data.js"></script>
+<script>
+  const EXTS = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+  const find = (id) => new Promise((res) => {
+    let i = 0;
+    const next = () => {
+      if (i >= EXTS.length) return res(null);
+      const u = `gorseller/${id}.${EXTS[i++]}?t=${Date.now()}`;
+      const im = new Image(); im.onload = () => res(u); im.onerror = next; im.src = u;
+    };
+    next();
+  });
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  (async () => {
+    let have = 0, total = 0, html = '';
+    for (const [ri, r] of ROUNDS.entries()) {
+      html += `<h2>Tur ${ri + 1} · ${esc(r.title)}</h2><div class="grid">`;
+      for (const [kind, cards] of [['doğru kart', r.correct], ['yanlış kart', r.wrong]]) {
+        for (const c of cards) {
+          total++;
+          const src = await find(c.id);
+          if (src) have++;
+          html += `<div class="c ${src ? '' : 'missing'}">
+            <div class="pic">${src ? `<img src="${src}" alt="">` : c.e}</div>
+            <div class="meta"><b>${esc(c.l)}</b><span class="kind">${kind}</span><br>
+            <code>${esc(c.id)}</code><br>
+            <span class="st ${src ? 'ok' : 'no'}">${src ? '✔ ' + esc(src.split('?')[0].split('/').pop()) : '✖ görsel yok (emoji)'}</span></div></div>`;
+        }
+      }
+      html += '</div>';
+    }
+    document.getElementById('list').innerHTML = html;
+    document.getElementById('sum').textContent = `${total} kartın ${have} tanesinin görseli var, ${total - have} tanesi eksik.`;
+  })();
+</script>
+</body>
+</html>

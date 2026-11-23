@@ -1,0 +1,17 @@
+GÖRSELLER KLASÖRÜ
+=================
+
+Oyundaki kart görselleri bu klasörden okunur.
+
+- Dosya adı = kart kimliği. Örnek: 1_tohumlama_pistoleti.jpg
+- Uzantı .jpg, .jpeg, .png, .webp veya .gif olabilir.
+- Var olan bir görseli değiştirmek için aynı adla üzerine kaydedin
+  (farklı uzantıyla eklerseniz eskisini silin; önce .jpg okunur).
+- Kare görseller en iyisi; değilse ortadan kırpılır. ~400x400 px yeterli.
+- Görseli olmayan kartta oyun emoji gösterir.
+
+Hangi kartın hangi dosya adını beklediğini ve neyin eksik olduğunu görmek için
+oyun klasöründeki gorsel-kontrol.html sayfasını açın.
+
+İnternetten eklediğiniz görsellerin kaynağını/lisansını CREDITS.md dosyasının
+sonundaki "Sonradan eklenen görseller" tablosuna yazın.

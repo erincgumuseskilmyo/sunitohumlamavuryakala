@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Vur-Yakala: Suni Tohumlama</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- GİRİŞ -->
+  <section class="card screen active" id="login-screen">
+    <h1>Vur-Yakala: Suni Tohumlama</h1>
+    <p class="lead">Deliklerden çıkan kartlara bak. Üstteki göreve uyan <b>doğru</b> kartlara vur, uymayanlara dokunma. 5 tur, her tur 20 saniye.</p>
+    <div class="tag-row">
+      <span class="tag">🧪 Malzeme</span>
+      <span class="tag">🐄 Kızgınlık</span>
+      <span class="tag">🧤 Hijyen</span>
+      <span class="tag">🌡️ Çözdürme</span>
+      <span class="tag">🎯 Uygulama</span>
+    </div>
+
+    <form id="login-form" novalidate>
+      <div class="row2">
+        <label>Ad
+          <input id="in-first" name="first" autocomplete="given-name" maxlength="40" required>
+        </label>
+        <label>Soyad
+          <input id="in-last" name="last" autocomplete="family-name" maxlength="40" required>
+        </label>
+      </div>
+      <label>Öğrenci No
+        <input id="in-no" name="no" inputmode="numeric" pattern="[0-9]*" maxlength="15" required>
+      </label>
+      <p class="form-error" id="login-error" role="alert"></p>
+      <button class="primary" type="submit">Oyunu Başlat</button>
+    </form>
+
+    <button class="link-btn" id="howto-toggle" type="button">Nasıl oynanır?</button>
+    <div id="howto">
+      <p><b>1.</b> Her turun görevi kırmızı şeritte yazar (ör. "KIZGINLIKTAKİ İNEĞİN BELİRTİLERİNİ VUR!").</p>
+      <p><b>2.</b> Doğru karta vurmak <b>+10 puan</b>. Art arda doğru vuruşlar kombo bonusu getirir (en fazla +10).</p>
+      <p><b>3.</b> Yanlış karta vurmak <b>1 can</b> götürür ve komboyu sıfırlar. 5 canın var.</p>
+      <p><b>4.</b> Doğru kartı kaçırmak can götürmez ama komboyu bozar.</p>
+      <p><b>5.</b> Tüm turları bitirirsen kalan her can <b>+25 puan</b>.</p>
+      <p><b>6.</b> Oyun sonunda yaptığın hataların nedenleri gösterilir.</p>
+    </div>
+
+    <div class="board-wrap">
+      <h2>🏆 Puan Tablosu</h2>
+      <p class="board-status" id="board-status-login"></p>
+      <ol class="board" id="board-login"><li class="muted">Yükleniyor…</li></ol>
+    </div>
+
+    <button class="link-btn small" id="credits-toggle" type="button">Görsel kaynakları</button>
+    <div id="credits"></div>
+  </section>
+
+  <!-- OYUN -->
+  <section class="card screen" id="game-screen">
+    <div id="hud">
+      <div id="hearts" aria-label="Can"></div>
+      <div id="round-label"></div>
+      <div id="score-box">0 puan</div>
+    </div>
+    <div id="timer-outer"><div id="timer-inner"></div></div>
+    <div id="instruction">Hazırlan…</div>
+    <div id="combo"></div>
+    <div id="field-wrap">
+      <div id="field"></div>
+      <div id="round-banner"></div>
+    </div>
+  </section>
+
+  <!-- SONUÇ -->
+  <section class="card screen" id="end-screen">
+    <h1 id="end-title">Oyun Bitti!</h1>
+    <div class="grade" id="grade-label"></div>
+    <div class="stats" id="end-stats"></div>
+    <p class="submit-status" id="submit-status"></p>
+
+    <div class="board-wrap">
+      <h2>🏆 Puan Tablosu</h2>
+      <p class="board-status" id="board-status-end"></p>
+      <ol class="board" id="board-end"></ol>
+    </div>
+
+    <button class="primary" id="retry-btn" type="button">Tekrar Oyna</button>
+    <button class="secondary" id="change-player-btn" type="button">Farklı öğrenciyle gir</button>
+
+    <h2 class="recap-h">📚 Kısa Tekrar</h2>
+    <div id="recap"></div>
+  </section>
+
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/data.js"></script>
+<script src="js/leaderboard.js"></script>
+<script src="js/credits.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
