@@ -23,7 +23,7 @@ const STV_CONFIG = {
      OKUNAMAZ; sıralama yalnızca öğrenci numarası maskelenmiş
      görünümden okunur. */
   supabaseAnonKey:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvcG9sY2F4Y3NueGxhcmhweXRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc5NDM5ODMsImV4cCI6MjEwMzUxOTk4M30.pI6K4ifVoMhQsZHP-ll9597gPtmZr6Ze-nqsaCgPL-0',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtvbHVmd3d1dm94aW90cHp5aGN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU0ODI0MDUsImV4cCI6MjExMTA1ODQwNX0.b4i7yDXhpfepo-CzDQexKc2CRPwIps0CoJ0HXQKxspg',
 
   /* SQL şemasında oluşturulan adlar. Değiştirmeyin. */
   table: 'suni_tohumlama_vy_scores',
