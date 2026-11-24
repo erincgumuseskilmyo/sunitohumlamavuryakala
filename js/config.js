@@ -15,7 +15,7 @@
 
 const STV_CONFIG = {
   /* Supabase > Project Settings > Data API > Project URL */
-  supabaseUrl: 'https://fopolcaxcsnxlarhpyts.supabase.co',
+  supabaseUrl: 'https://kolufwwuvoxiotpzyhcw.supabase.co/rest/v1/',
 
   /* Supabase > Project Settings > API Keys > anon public
      Herkese açık anahtardır. Yetkisi supabase-schema.sql içindeki
